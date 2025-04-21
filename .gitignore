@@ -1,3 +1,13 @@
+#this is the default .gitignore file for github repositories
+
+#ignore environment variables
+*.env
+
+#ignore Cache folders
 __pycache__/
-.env
-pclcenv/
+
+#ignore .vscode folder
+.vscode/
+
+#ignore poetry.lock file
+poetry.lock

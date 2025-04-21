@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "pocket-clinic"
+version = "0.1.0"
+description = "A Simple AI healthcare assistant"
+authors = ["commanderzer0 <commanderzer0@gmail.com>, Joao Moura"]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0, <3.13"
+unstructured = '==0.10.25'
+pyowm = "3.3.0"
+python-dotenv = "1.0.0"
+langchain = "^0.3.23"
+langchain-openai = "^0.3.14"
+langchain-community = "^0.3.21"
+crewai = "^0.114.0"
+vosk = "^0.3.45"
+soundfile = "^0.13.1"
+pandas = "^2.2.3"
+ace-tools = "^0.0"
+openai = "^1.75.0"
+twilio = "^9.5.2"
+pydub = "^0.25.1"
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+useLibraryCodeForTypes = true
+exclude = [".cache"]
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'ARG', 'SIM']
+ignore = ['w291', 'w292', 'w293']
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
