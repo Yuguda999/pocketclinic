@@ -1,0 +1,6 @@
+crewai
+flask
+twilio
+transformers
+torch
+openai-whisper

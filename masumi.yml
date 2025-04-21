@@ -1,0 +1,17 @@
+service: pocket-clinic
+runtime: python3.11
+entrypoint: app:run
+env:
+  TWILIO_SID: ${{ secrets.TWILIO_SID }}
+  TWILIO_TOKEN: ${{ secrets.TWILIO_TOKEN }}
+  TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
+  MODEL_PATH: "llama2-7b-imci/"
+resources:
+  memory: 1Gi
+  cpu: 0.5
+  gpu: 0.2
+routes:
+  - path: /triage
+    methods: [POST]
+    auth: none
+    handler: run_triage
