@@ -62,6 +62,8 @@ PocketClinic is an AI-powered healthcare assistant that:
 
 ## 🚀 Usage
 
+### Command Line Interface
+
 Run the main application:
 
 ```bash
@@ -72,6 +74,36 @@ You can modify the input parameters in `main.py` to test different scenarios:
 - `text_message`: SMS text describing patient symptoms
 - `audio_file`: Path to an audio file containing symptom description
 - `phone_number`: Recipient's phone number for SMS notifications
+
+### REST API
+
+PocketClinic also provides a REST API using FastAPI. To start the API server:
+
+```bash
+python server.py
+```
+
+This will start the API server at http://localhost:8000. You can access the API documentation at http://localhost:8000/docs.
+
+#### API Endpoints
+
+The API provides the following endpoints:
+
+- **POST /api/v1/process**: Process a request with text input
+- **POST /api/v1/process/audio**: Process a request with audio input
+
+Both endpoints handle the entire PocketClinic workflow:
+1. Collect symptoms from the input (text or audio)
+2. Triage the symptoms
+3. Dispatch a referral via SMS
+
+#### Testing the API
+
+You can test the API using the provided test script:
+
+```bash
+python tests/test_api_single.py
+```
 
 ## 🧪 Testing
 
@@ -91,8 +123,12 @@ python tests/test_referral_dispatch.py
 ## 📁 Project Structure
 
 - `main.py` - Main application entry point
+- `server.py` - FastAPI server entry point
 - `agents.py` - CrewAI agent definitions
 - `tasks.py` - CrewAI task definitions
+- `api/` - API implementation
+  - `main.py` - FastAPI application
+  - `models.py` - Pydantic models for request/response validation
 - `pocket_clinic_tools/` - Core functionality modules
   - `symptom_collector.py` - Extracts symptoms from text/audio
   - `triage_symptoms.py` - Evaluates symptom severity
