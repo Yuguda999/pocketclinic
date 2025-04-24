@@ -1,29 +1,114 @@
-## agents.py
-This file contains the definition of custom agents.
-To create a Agent, you need to define the following:
-1. Role: The role of the agent.
-2. Backstory: The backstory of the agent.
-3. Goal: The goal of the agent.
-4. Tools: The tools that the agent has access to (optional).
-5. Allow Delegation: Whether the agent can delegate tasks to other agents(optional).
+# PocketClinic
 
-    [More Details about Agent](https://docs.crewai.com/concepts/agents).
+A simple AI healthcare assistant designed to help healthcare workers in resource-constrained settings triage patients through SMS or voice messages.
 
-## task.py
-This file contains the definition of custom tasks.
-To Create a task, you need to define the following :
-1. description: A string that describes the task.
-2. agent: An agent object that will be assigned to the task.
-3. expected_output: The expected output of the task.
+## 🌟 Overview
 
-    [More Details about Task](https://docs.crewai.com/concepts/tasks).
+PocketClinic is an AI-powered healthcare assistant that:
+- Collects patient symptoms from voice recordings or text messages
+- Analyzes symptoms using WHO IMCI (Integrated Management of Childhood Illness) protocols
+- Triages patients based on symptom severity
+- Dispatches referrals via SMS with teleconsultation links
 
-## crew (main.py)
-This is the main file that you will use to run your custom crew.
-To create a Crew , you need to define Agent ,Task and following Parameters:
-1. Agent: List of agents that you want to include in the crew.
-2. Task: List of tasks that you want to include in the crew.
-3. verbose: If True, print the output of each task.(default is False).
-4. debug: If True, print the debug logs.(default is False).
+## 🚀 Features
 
-    [More Details about Crew](https://docs.crewai.com/concepts/crew).
+- **Multi-modal input**: Process both voice recordings and SMS text messages
+- **Symptom collection**: Extract structured symptom data from unstructured inputs
+- **Automated triage**: Classify cases as "Likely malaria", "Refer for pneumonia", or "All clear"
+- **SMS notifications**: Send referral information to healthcare workers via Twilio
+- **Agent-based architecture**: Uses CrewAI for a multi-agent workflow
+
+## 🛠️ Technologies
+
+- Python 3.10+
+- [CrewAI](https://docs.crewai.com/) - Multi-agent orchestration
+- [OpenAI](https://openai.com/) - GPT-4o for NLP and audio transcription
+- [Twilio](https://www.twilio.com/) - SMS messaging
+- [Vosk](https://alphacephei.com/vosk/) - Speech recognition
+- [Pydub](https://github.com/jiaaro/pydub) - Audio processing
+
+## 📋 Prerequisites
+
+- Python 3.10 or higher
+- Poetry (for dependency management)
+- OpenAI API key
+- Twilio account (SID, token, and phone number)
+
+## 🔧 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/pocketclinic.git
+   cd pocketclinic
+   ```
+
+2. Install dependencies using Poetry:
+   ```bash
+   poetry install
+   ```
+
+3. Create a `.env` file based on `.env_example`:
+   ```bash
+   cp .env_example .env
+   ```
+
+4. Add your API keys to the `.env` file:
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   TWILIO_SID=your_twilio_sid
+   TWILIO_TOKEN=your_twilio_token
+   TWILIO_NUMBER=your_twilio_phone_number
+   ```
+
+## 🚀 Usage
+
+Run the main application:
+
+```bash
+python main.py
+```
+
+You can modify the input parameters in `main.py` to test different scenarios:
+- `text_message`: SMS text describing patient symptoms
+- `audio_file`: Path to an audio file containing symptom description
+- `phone_number`: Recipient's phone number for SMS notifications
+
+## 🧪 Testing
+
+The project includes test scripts for each component:
+
+```bash
+# Test symptom collection
+python tests/test_symptom_collector.py
+
+# Test symptom triage
+python tests/test_triage_symptoms.py
+
+# Test referral dispatch
+python tests/test_referral_dispatch.py
+```
+
+## 📁 Project Structure
+
+- `main.py` - Main application entry point
+- `agents.py` - CrewAI agent definitions
+- `tasks.py` - CrewAI task definitions
+- `pocket_clinic_tools/` - Core functionality modules
+  - `symptom_collector.py` - Extracts symptoms from text/audio
+  - `triage_symptoms.py` - Evaluates symptom severity
+  - `referral_dispatcher.py` - Sends SMS notifications
+  - `audio_utils.py` - Audio preprocessing utilities
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- World Health Organization for IMCI protocols
+- CrewAI for the agent framework
+- OpenAI for NLP capabilities
